@@ -1,27 +1,24 @@
-import pymorphy2
+from pymorphy2 import MorphAnalyzer
 import re
 import nltk
+morph = MorphAnalyzer()
 
 
 def lemmatize(text):
-    res = []
-    morph = pymorphy2.MorphAnalyzer()
-    for line in text:
-        res_line = []
-        for word in line:
-            res_line.append(morph.parse(word)[0].normal_form)
-        res.append(' '.join(res_line))
-    text = "".join(res).strip()
+    tokens = []
+    for token in text.split():
+        token = token.strip()
+        token = morph.normal_forms(token)[0]
+        tokens.append(token)
+    text = " ".join(tokens).strip()
     return text
 
 
 def text_filter(text):
-    text = text.lower()
-    text = text.strip()  # strip - вырезать пробелы с начала и конца строки
-    pattern = r"[^\w\s]"
-    text = re.sub(pattern, "", text)  # Из переменной text вырезаем "Все что не слово и не пробел"
-    text = lemmatize(text)
-    return text
+    text = text.lower().strip() # strip - вырезать пробелы с начала и конца строки
+    pattern = r"[^\w\s]+|[\d]+"
+    text = re.sub(pattern, "", text) # Из переменной text вырезаем "Все что не слово и не пробел"
+    return lemmatize(text)
 
 
 def text_match(user_text, example):
@@ -37,5 +34,4 @@ def text_match(user_text, example):
     ratio = distance / len(example)
     if ratio < 0.40:
         return True
-
     return False
