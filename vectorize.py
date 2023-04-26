@@ -18,7 +18,6 @@ for intent in INTENTS:
         Y.append(intent)   # Добвляем интент в списко Y
 
 vectorizer = CountVectorizer(analyzer="char") #Настройки в скобочках
-#попробовать ngram_range (вектоизацию по буквам, а не словам), analyzer
 vectorizer.fit(X) #Обучаем векторайзер
 
 vecX = vectorizer.transform(X)    #Все тексты преобразуем в вектора
