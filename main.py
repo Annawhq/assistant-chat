@@ -10,9 +10,10 @@ def get_intent_ml(user_text):
     user_text = text_filter(user_text)
     print(user_text)
     vec_text = vectorizer.transform([user_text])
-    intent = model.predict(vec_text)[0]
-    print(intent)
-    return intent
+    if vec_text.nnz == 0:
+        intent = model.predict(vec_text)[0]
+        print(intent)
+    return "not_that"
 
 
 def get_random_response(intent):
@@ -21,6 +22,8 @@ def get_random_response(intent):
 
 def bot(user_text):
     intent = get_intent_ml(user_text)
+    if intent is None:
+        return get_random_response("not_that")
     return get_random_response(intent)
 
 
