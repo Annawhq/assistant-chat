@@ -10,9 +10,11 @@ def get_intent_ml(user_text):
     user_text = text_filter(user_text)
     print(user_text)
     vec_text = vectorizer.transform([user_text])
-    if vec_text.nnz == 0:
+    print(vec_text)
+    if vec_text.nnz != 0:
         intent = model.predict(vec_text)[0]
         print(intent)
+        return intent
     return "not_that"
 
 
