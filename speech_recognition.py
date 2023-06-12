@@ -8,7 +8,7 @@ class Speech:
     model = Model(r"D:/vosk/vosk-model-small-ru-0.22/vosk-model-small-ru-0.22")
     rec = KaldiRecognizer(model, 16000)
     rec.SetWords(True)
-    ffmpeg_path = "C:/ffmpeg/ffmpeg.exe"
+    ffmpeg_path = "D:/vosk/ffmpeg/ffmpeg.exe"
 
     def recognize(self, audio_file_name=None):
         # Конвертация аудио в wav и результат в process.stdout

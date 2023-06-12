@@ -5,7 +5,6 @@ from filter import text_filter
 from secret_token import TOKEN
 from speech_recognition import Speech
 from vectorize import vectorizer, model, INTENTS
-from datetime import datetime
 
 
 def get_intent_ml(user_text):

@@ -1,9 +1,8 @@
 import json
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, f1_score, balanced_accuracy_score
-
 from filter import text_filter
+
 
 with open("intents_dataset.json", "r", encoding="utf-8") as config_file:
     data = json.load(config_file, strict=False)
@@ -24,5 +23,3 @@ vecX = vectorizer.transform(X)    #Все тексты преобразуем в
 
 model = RandomForestClassifier(n_estimators=1000, bootstrap=True, max_depth=None, n_jobs=-1, max_features="auto")
 model.fit(vecX, Y) #Обучение модели
-
-Y_pred = model.predict(vecX)
